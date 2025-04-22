@@ -1,0 +1,149 @@
+{
+    "info": {
+        "name": "Instituto Criativo API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth - Register",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/auth/register",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "auth",
+                        "register"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Gustavo Silva\",\n    \"email\": \"gustavo@teste.com\",\n    \"password\": \"123456\",\n    \"role_id\": 1\n}"
+                }
+            }
+        },
+        {
+            "name": "Auth - Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/auth/login",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "auth",
+                        "login"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"gustavo@teste.com\",\n    \"password\": \"123456\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Eventos - Listar",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/eventos",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "eventos"
+                    ]
+                },
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Eventos - Criar",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/eventos",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "eventos"
+                    ]
+                },
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "title",
+                            "value": "Evento Postman",
+                            "type": "text"
+                        },
+                        {
+                            "key": "description",
+                            "value": "Evento criado via Postman",
+                            "type": "text"
+                        },
+                        {
+                            "key": "date",
+                            "value": "2025-05-01T20:00:00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "location",
+                            "value": "Online",
+                            "type": "text"
+                        },
+                        {
+                            "key": "created_by",
+                            "value": "1",
+                            "type": "text"
+                        },
+                        {
+                            "key": "imagem",
+                            "type": "file",
+                            "src": ""
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
