@@ -1,3 +1,5 @@
+require("./utils/db");
+
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -36,3 +38,5 @@ app.use("/eventos", authMiddleware, eventosRoutes);
 app.get("/", (req, res) => {
     res.send("API DO INSTITUTO CRIATIVO FUNCIONANDO ✅");
 });
+
+module.exports = app;

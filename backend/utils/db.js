@@ -31,4 +31,6 @@ const sequelize = new Sequelize(
 })();
 
 // EXPORTA A CONEXÃO
-module.exports = sequelize;
+module.exports = {
+    sequelize
+};

@@ -1,6 +1,6 @@
 // IMPORTA OS TIPOS DO SEQUELIZE E O ORM
 const { DataTypes } = require("sequelize");
-const sequelize = require("../utils/db");
+const { sequelize } = require("../utils/db");
 
 // BIBLIOTECA PARA HASH DE SENHA
 const bcrypt = require("bcrypt");

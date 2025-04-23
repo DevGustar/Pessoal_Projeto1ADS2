@@ -1,6 +1,6 @@
 // IMPORTA A CONEXÃO COM O BANCO E OS TIPOS DE DADOS DO SEQUELIZE
 const { DataTypes } = require("sequelize");
-const sequelize = require("../utils/db"); // CONEXÃO COM O BANCO
+const { sequelize } = require("../utils/db");
 
 // DEFINE O MODELO 'Evento' CORRESPONDENTE À TABELA 'Events'
 const Evento = sequelize.define("Evento", {

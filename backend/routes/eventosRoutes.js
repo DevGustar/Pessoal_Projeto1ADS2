@@ -1,7 +1,7 @@
 // IMPORTA O EXPRESS PARA USAR O OBJETO ROUTER
 const express = require("express");
 
-// IMPORTA O CONTROLADOR QUE TERÁ A LÓGICA DAS OPERAÇÕES (VAMOS CRIAR JÁ JÁ)
+// IMPORTA O CONTROLADOR QUE TERÁ A LÓGICA DAS OPERAÇÕES
 const eventosController = require("../controllers/eventosController");
 
 // IMPORTA O MIDDLEWARE MULTER PARA TRATAR O UPLOAD DE IMAGENS
@@ -24,21 +24,8 @@ const upload = multer({ storage: storage });
 // CRIA O OBJETO DE ROTAS
 const router = express.Router();
 
-// ROTA: LISTAR TODOS OS EVENTOS
-router.get("/", eventosController.listarEventos);
-
-// ROTA: CRIAR NOVO EVENTO COM UPLOAD DE IMAGEM
-router.post("/", upload.single("imagem"), eventosController.criarEvento);
-
-// ROTA: ATUALIZAR UM EVENTO PELO ID (OPCIONALMENTE COM NOVA IMAGEM)
-router.put("/:id", upload.single("imagem"), eventosController.atualizarEvento);
-
-// ROTA: EXCLUIR UM EVENTO PELO ID
-router.delete("/:id", eventosController.deletarEvento);
-
-const { body } = require("express-validator");
-
 // Validações para criação e atualização de eventos
+const { body } = require("express-validator");
 const validarEvento = [
   body("title").notEmpty().withMessage("O título é obrigatório."),
   body("description").notEmpty().withMessage("A descrição é obrigatória."),
@@ -47,11 +34,17 @@ const validarEvento = [
   body("created_by").isInt().withMessage("O ID do criador deve ser um número inteiro."),
 ];
 
+// ROTA: LISTAR TODOS OS EVENTOS
+router.get("/", eventosController.listarEventos);
+
 // ROTA: CRIAR NOVO EVENTO COM UPLOAD DE IMAGEM
 router.post("/", upload.single("imagem"), validarEvento, eventosController.criarEvento);
 
-// ROTA: ATUALIZAR UM EVENTO PELO ID (OPCIONALMENTE COM NOVA IMAGEM)
+// ROTA: ATUALIZAR UM EVENTO PELO ID (COM VALIDAÇÃO E UPLOAD DE IMAGEM)
 router.put("/:id", upload.single("imagem"), validarEvento, eventosController.atualizarEvento);
+
+// ROTA: EXCLUIR UM EVENTO PELO ID
+router.delete("/:id", eventosController.deletarEvento);
 
 // EXPORTA AS ROTAS PARA SEREM USADAS NO APP PRINCIPAL
 module.exports = router;

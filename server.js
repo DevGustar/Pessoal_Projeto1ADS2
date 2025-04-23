@@ -1,10 +1,16 @@
-// PONTO DE ENTRADA PRINCIPAL
-const app = require("./backend/app");
+require("dotenv").config(); // para carregar as variáveis
 
-// PORTA DEFINIDA NO .env OU PADRÃO 3000
+const app = require("./backend/app");
+const { sequelize } = require("./backend/utils/db");
+const { User, Evento } = require("./backend/models");
+
 const PORT = process.env.PORT || 3000;
 
-// INICIA O SERVIDOR
-app.listen(PORT, () => {
+sequelize.sync().then(() => {
+  console.log("✅ Banco sincronizado.");
+  app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  });
+}).catch((err) => {
+  console.error("❌ Erro ao sincronizar o banco:", err);
 });
